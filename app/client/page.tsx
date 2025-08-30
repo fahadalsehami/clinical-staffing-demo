@@ -1,13 +1,11 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   CheckCircle,
-  XCircle,
   MessageSquare,
-  Calendar,
   Clock,
   User,
   Mail,
@@ -16,10 +14,8 @@ import {
   DollarSign,
   Award,
   Shield,
-  Scale,
   FileText,
   Star,
-  ChevronRight,
   Download,
   Video,
   Send,
@@ -32,7 +28,6 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Progress } from '@/components/ui/progress'
 import { toast } from 'sonner'
 import confetti from 'canvas-confetti'
 
@@ -359,7 +354,7 @@ export default function ClientPage() {
                       <div className="p-4 bg-green-50/50 dark:bg-green-950/20 rounded-lg">
                         <h3 className="font-semibold mb-2 flex items-center gap-2">
                           <CheckCircle className="h-5 w-5 text-green-500" />
-                          Great choice! Let's schedule an interview.
+                          Great choice! Let&apos;s schedule an interview.
                         </h3>
                       </div>
 
@@ -545,23 +540,23 @@ export default function ClientPage() {
                 {selectedResponse === 'accept' && (
                   <>
                     <p className="text-muted-foreground mb-6">
-                      Great! We'll coordinate with Dr. Chen to schedule the interview on{' '}
+                      Great! We&apos;ll coordinate with Dr. Chen to schedule the interview on{' '}
                       {interviewDate ? new Date(interviewDate).toLocaleDateString() : 'your preferred date'}.
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      You'll receive a calendar invite within the next hour.
+                      You&apos;ll receive a calendar invite within the next hour.
                     </p>
                   </>
                 )}
                 {selectedResponse === 'negotiate' && (
                   <p className="text-muted-foreground">
                     We've received your negotiation terms and will discuss them with the candidate.
-                    We'll get back to you within 24 hours.
+                    We&apos;ll get back to you within 24 hours.
                   </p>
                 )}
                 {selectedResponse === 'reject' && (
                   <p className="text-muted-foreground">
-                    Thank you for your feedback. We'll use this information to find better matches for your future needs.
+                    Thank you for your feedback. We&apos;ll use this information to find better matches for your future needs.
                   </p>
                 )}
                 <div className="mt-8 flex justify-center gap-4">
