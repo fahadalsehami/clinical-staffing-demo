@@ -7,7 +7,7 @@ import {
   CheckCircle, AlertCircle, XCircle, Clock,
   TrendingUp, User, Calendar, DollarSign,
   Briefcase, MapPin, Heart, Shield, Sparkles,
-  BarChart3, FileText, Send, RefreshCw
+  BarChart3, FileText, Send, RefreshCw, ChevronDown, ChevronUp
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -48,261 +48,261 @@ const conversationScript: ConversationTurn[] = [
     speaker: 'agent',
     text: "Hi Dr. Rodriguez, this is Sarah from MedTalent Partners. I know you're busy, so I'll be brief. I'm calling about an exciting emergency medicine opportunity at Cedar Sinai that specifically addresses the work-life balance challenges many physicians face. Do you have 2 minutes?",
     timestamp: '0:00',
-    sentiment: 'neutral',
-    intent: 'introduction'
+    sentiment: 'positive',
+    intent: 'introduction',
+    keyPoints: ['Work-life balance', 'Cedar Sinai', 'Emergency medicine']
   },
   {
     id: '2',
     speaker: 'candidate',
-    text: "Oh, hi Sarah. I wasn't expecting a call, but... sure, I can spare a couple minutes. What's this about exactly?",
+    text: "Cedar Sinai? That's actually interesting. I've heard good things about their ED. But honestly, I'm pretty happy where I am right now. What makes this opportunity different?",
     timestamp: '0:18',
     sentiment: 'neutral',
-    intent: 'cautious_interest'
+    intent: 'curiosity_with_hesitation',
+    keyPoints: ['Interest in Cedar Sinai', 'Currently satisfied', 'Open to hearing more']
   },
   {
     id: '3',
     speaker: 'agent',
-    text: "I appreciate your time, Dr. Rodriguez. I noticed your recent publication on pediatric trauma protocols - impressive work! The reason I'm reaching out is that Cedar Sinai is launching a new evidence-based ER initiative, and they're specifically looking for someone with your expertise in pediatric emergency care. They're offering a unique 7-on/7-off schedule with no mandatory overtime. How does your current schedule compare?",
-    timestamp: '0:26',
+    text: "I completely understand, and it's great that you're happy in your current role. What caught my attention for you specifically was their new flexible scheduling model - they're offering 7-on/7-off blocks with no overnight requirements after 5 years. Plus, they've just opened a state-of-the-art trauma center. What aspects of your current role do you enjoy most?",
+    timestamp: '0:35',
     sentiment: 'positive',
-    intent: 'value_proposition',
-    keyPoints: ['Personalized reference', 'Specific opportunity', 'Work-life balance focus']
+    intent: 'discovery',
+    keyPoints: ['Flexible scheduling', 'No overnight after 5 years', 'New trauma center']
   },
   {
     id: '4',
     speaker: 'candidate',
-    text: "Well, right now I'm doing five 12-hour shifts a week, plus call twice a month. It's been pretty exhausting, especially with two young kids at home. The 7-on/7-off sounds interesting... but I'm curious, what's the patient volume like?",
-    timestamp: '0:52',
+    text: "The scheduling does sound appealing. Right now I'm doing 12-hour shifts with irregular patterns. The trauma center interests me too - I'm actually pursuing additional trauma certification. What's the patient volume like?",
+    timestamp: '0:58',
     sentiment: 'positive',
-    intent: 'engaged_with_concerns',
-    keyPoints: ['Current pain point identified', 'Interest in schedule', 'Quality concern raised']
+    intent: 'engaged_questioning',
+    keyPoints: ['Schedule pain point', 'Trauma interest', 'Certification pursuit']
   },
   {
     id: '5',
     speaker: 'agent',
-    text: "That's a great question, and I understand the concern about volume - it directly impacts quality of care. They see about 180-200 patients per day across a 52-bed ER, with excellent physician-to-patient ratios. They maintain 4-5 attendings during peak hours, plus residents. Most importantly, they have dedicated scribes and a rapid triage system that's reduced door-to-doctor time by 40%. How does that compare to your current facility?",
-    timestamp: '1:10',
+    text: "They're seeing about 280-300 patients daily with a 30% trauma case mix - perfect for someone building trauma expertise. They also offer full funding for additional certifications and have partnerships with UCLA for research opportunities. You mentioned irregular patterns - how is that affecting your work-life balance currently?",
+    timestamp: '1:20',
     sentiment: 'positive',
-    intent: 'addressing_concerns',
-    keyPoints: ['Specific metrics provided', 'Quality indicators highlighted']
+    intent: 'value_building',
+    keyPoints: ['High volume', 'Certification funding', 'Research opportunities']
   },
   {
     id: '6',
     speaker: 'candidate',
-    text: "That's actually better staffing than we have. We're seeing similar volume but with only 3 attendings most shifts. The scribe support would be huge - I spend way too much time on documentation. What about compensation? I'm currently at $425K base.",
-    timestamp: '1:35',
-    sentiment: 'positive',
-    intent: 'compensation_inquiry',
-    keyPoints: ['Positive comparison', 'Compensation discussion opened']
+    text: "Honestly, it's been tough. My wife and I have two young kids, and the unpredictable schedule makes planning anything impossible. The certification funding is huge - I'm paying out of pocket right now. What about compensation? I'm at about $385K base currently.",
+    timestamp: '1:45',
+    sentiment: 'neutral',
+    intent: 'personal_disclosure',
+    keyPoints: ['Family impact', 'Financial concern', 'Current compensation']
   },
   {
     id: '7',
     speaker: 'agent',
-    text: "I'm glad you asked about compensation. The base range is $450-500K, depending on experience, plus productivity bonuses that typically add another 15-20%. With your 8 years of experience and subspecialty training, you'd likely be at the higher end. They also offer a $50K signing bonus, full relocation support, and excellent benefits including a 6% 401k match. Would it be helpful if I sent you the complete compensation package details?",
-    timestamp: '1:58',
+    text: "I hear you on the family challenges - that's exactly why Cedar Sinai redesigned their scheduling. For compensation, they're offering $420-450K base, plus productivity bonuses averaging another $60K. They also provide on-site childcare and backup care services. Would having predictable 7-day blocks help with your family planning?",
+    timestamp: '2:10',
     sentiment: 'positive',
-    intent: 'compensation_presentation',
-    keyPoints: ['Above current comp', 'Additional incentives', 'Moving toward next steps']
+    intent: 'addressing_pain_points',
+    keyPoints: ['Higher compensation', 'Childcare benefits', 'Predictable schedule']
   },
   {
     id: '8',
     speaker: 'candidate',
-    text: "Yes, I'd definitely like to see that. This is sounding more interesting than I expected. My main concern would be relocating the family - my spouse works here too. Do they have any spousal placement assistance?",
-    timestamp: '2:25',
+    text: "Those numbers are compelling, and the childcare benefit is something we don't have. The 7-on/7-off would be life-changing honestly. But I'm concerned about relocating - we just bought our house last year. How flexible are they on start dates?",
+    timestamp: '2:35',
     sentiment: 'positive',
-    intent: 'interested_with_objection',
-    keyPoints: ['Interest confirmed', 'Relocation concern', 'Spousal consideration']
+    intent: 'interested_but_concerned',
+    keyPoints: ['Compensation interest', 'Relocation concern', 'Timing flexibility']
   },
   {
     id: '9',
     speaker: 'agent',
-    text: "Absolutely, and that's such an important consideration. Cedar Sinai has a comprehensive relocation program that includes spousal career assistance. They work with a placement firm that has helped 90% of relocating spouses find positions within 60 days. Plus, Los Angeles has a thriving healthcare market. What field is your spouse in?",
-    timestamp: '2:42',
+    text: "They're very flexible on timing - anywhere from 3-6 months out works. They also offer a generous relocation package including home sale assistance and temporary housing. Many physicians actually commute from your area - it's about 35 minutes. Would you be open to a video call with their ED director next week to explore this further?",
+    timestamp: '3:00',
     sentiment: 'positive',
-    intent: 'objection_handling'
+    intent: 'moving_to_close',
+    keyPoints: ['Flexible start', 'Relocation support', 'Commute option']
   },
   {
     id: '10',
     speaker: 'candidate',
-    text: "She's a pediatric nurse practitioner. That's really good to know about the placement assistance. Look, I wasn't planning on making any moves right now, but this does sound like it could be worth exploring. What would be the next step?",
-    timestamp: '3:05',
+    text: "You know what, yes. This sounds worth exploring. The combination of schedule, compensation, and especially that trauma center is really attractive. Can we do something Tuesday or Wednesday afternoon?",
+    timestamp: '3:22',
     sentiment: 'positive',
-    intent: 'ready_to_proceed',
-    keyPoints: ['Objection addressed', 'Interest in next steps']
+    intent: 'commitment',
+    keyPoints: ['Agreement to meet', 'Tuesday/Wednesday preference', 'Multiple value props resonated']
   },
   {
     id: '11',
     speaker: 'agent',
-    text: "I'm so glad you're interested, Dr. Rodriguez! The next step would be a casual video call with Dr. James Mitchell, the ER Director. He's also a parent and made a similar move for work-life balance three years ago. He's available Tuesday at 7 PM or Thursday at 8 PM - both after typical bedtime routines. Which works better for you?",
-    timestamp: '3:25',
+    text: "Perfect! I have slots available Tuesday at 2 PM or Wednesday at 3:30 PM. Which works better for you? I'll send you a calendar invite with a Zoom link, plus I'll include a detailed position overview and some videos of the new trauma facility.",
+    timestamp: '3:40',
     sentiment: 'positive',
     intent: 'scheduling',
-    keyPoints: ['Specific next step', 'Personalized scheduling options']
+    keyPoints: ['Specific times offered', 'Follow-up materials promised']
   },
   {
     id: '12',
     speaker: 'candidate',
-    text: "Thursday at 8 PM would work well. Can you send me some information about the position and the hospital before then? I'd like to do some research and discuss it with my wife.",
-    timestamp: '3:45',
+    text: "Wednesday at 3:30 works perfectly. Send it to my personal email - david.rodriguez@gmail.com. And Sarah, I appreciate you taking the time to understand what I'm looking for. This is much more relevant than most recruiting calls I get.",
+    timestamp: '3:58',
     sentiment: 'positive',
-    intent: 'commitment',
-    keyPoints: ['Meeting scheduled', 'Information requested', 'Family involvement']
+    intent: 'confirmation_and_praise',
+    keyPoints: ['Meeting confirmed', 'Email provided', 'Positive feedback']
   },
   {
     id: '13',
     speaker: 'agent',
-    text: "Perfect! I'll send you a comprehensive packet within the hour including the position details, compensation structure, relocation benefits, and some videos from current physicians about their experience. I'll also include information about schools and neighborhoods since you mentioned having young children. The video call invite will come from Dr. Mitchell directly. Is this the best number to text you a confirmation?",
-    timestamp: '4:02',
+    text: "Thank you Dr. Rodriguez, that means a lot! I'll send that invite within the hour. Before our Wednesday call, feel free to text me any questions at 555-0123. I'm also sending you a brief video from Dr. Kim, the ED director, sharing his vision for the department. Looking forward to connecting you both!",
+    timestamp: '4:20',
     sentiment: 'positive',
-    intent: 'confirmation',
-    keyPoints: ['Follow-up materials', 'Personal touches', 'Contact confirmation']
+    intent: 'follow_up_commitment',
+    keyPoints: ['Immediate follow-up', 'Additional touchpoint', 'Personal video']
   },
   {
     id: '14',
     speaker: 'candidate',
-    text: "Yes, this number works for texts. Sarah, I really appreciate how prepared you were for this call. You clearly did your homework. I'll look for that information and I'll see Dr. Mitchell on Thursday.",
-    timestamp: '4:20',
+    text: "Sounds great, Sarah. I'll review everything before Wednesday. Have a great rest of your day!",
+    timestamp: '4:35',
     sentiment: 'positive',
     intent: 'positive_close',
-    keyPoints: ['Appreciation expressed', 'Commitment confirmed']
+    keyPoints: ['Commitment to review', 'Friendly closing']
   },
   {
     id: '15',
     speaker: 'agent',
-    text: "Thank you so much, Dr. Rodriguez! I'm excited about this potential fit. I'll send everything shortly, and I'll follow up on Wednesday to make sure you have everything you need for Thursday's call. Have a wonderful rest of your day, and good luck with your shift tonight!",
-    timestamp: '4:35',
+    text: "You too, Dr. Rodriguez! I'm excited about this potential fit. Talk to you Wednesday!",
+    timestamp: '4:42',
     sentiment: 'positive',
-    intent: 'closing',
-    keyPoints: ['Follow-up scheduled', 'Personal touch', 'Professional close']
+    intent: 'enthusiastic_close',
+    keyPoints: ['Enthusiasm maintained', 'Next step confirmed']
   }
 ]
 
-const realTimeMetrics = {
-  intents: {
-    interest_level: 85,
-    objection_severity: 20,
-    commitment_probability: 78,
-    satisfaction_score: 92
-  },
-  topics: [
-    { topic: 'Work-Life Balance', mentions: 4, sentiment: 'positive' },
-    { topic: 'Compensation', mentions: 3, sentiment: 'positive' },
-    { topic: 'Patient Care Quality', mentions: 2, sentiment: 'neutral' },
-    { topic: 'Relocation', mentions: 2, sentiment: 'concerned' },
-    { topic: 'Family Considerations', mentions: 3, sentiment: 'important' }
-  ],
-  keyMoments: [
-    { time: '0:52', event: 'Pain point identified', impact: 'high' },
-    { time: '1:35', event: 'Compensation interest', impact: 'high' },
-    { time: '2:25', event: 'Spousal concern raised', impact: 'medium' },
-    { time: '3:05', event: 'Ready to proceed signal', impact: 'critical' },
-    { time: '3:45', event: 'Meeting confirmed', impact: 'success' }
-  ]
-}
-
-export function AIVoiceAgentAdvanced() {
-  const [callState, setCallState] = useState<'idle' | 'connecting' | 'active' | 'ended'>('idle')
-  const [currentTurnIndex, setCurrentTurnIndex] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isMuted, setIsMuted] = useState(false)
-  const [callDuration, setCallDuration] = useState(0)
-  const [activeTab, setActiveTab] = useState<'conversation' | 'analytics' | 'strategy' | 'coaching'>('conversation')
-  const [agentStrategy, setAgentStrategy] = useState<AgentStrategy>({
+const agentStrategies: AgentStrategy[] = [
+  {
     phase: 'intro',
-    objective: 'Build rapport and identify pain points',
+    objective: 'Build rapport and earn permission to continue',
     talkingPoints: [
-      'Reference recent publication',
-      'Mention work-life balance',
-      'Highlight 7-on/7-off schedule'
+      'Mention specific hospital/practice name',
+      'Reference work-life balance immediately',
+      'Ask for just 2 minutes'
     ],
     questionsToAsk: [
-      'Current schedule satisfaction?',
-      'Important factors in next role?',
-      'Timeline for making a change?'
+      'Do you have 2 minutes?',
+      'Is now a bad time?'
     ]
+  },
+  {
+    phase: 'discovery',
+    objective: 'Uncover pain points and motivations',
+    talkingPoints: [
+      'Acknowledge current satisfaction',
+      'Highlight unique differentiators',
+      'Show genuine interest in their situation'
+    ],
+    questionsToAsk: [
+      'What aspects of your current role do you enjoy most?',
+      'How is your current schedule affecting work-life balance?',
+      'What would make you consider a change?'
+    ]
+  },
+  {
+    phase: 'presentation',
+    objective: 'Present value proposition aligned with their needs',
+    talkingPoints: [
+      'Specific benefits matching their pain points',
+      'Concrete numbers and facts',
+      'Success stories of similar physicians'
+    ],
+    questionsToAsk: [
+      'How does this compare to your current situation?',
+      'What questions do you have about this?'
+    ]
+  },
+  {
+    phase: 'objection_handling',
+    objective: 'Address concerns without being pushy',
+    talkingPoints: [
+      'Acknowledge the validity of concerns',
+      'Provide specific solutions',
+      'Offer flexibility and options'
+    ],
+    questionsToAsk: [
+      'What would need to happen for this to work?',
+      'Are there other concerns I can address?'
+    ]
+  },
+  {
+    phase: 'closing',
+    objective: 'Secure next step commitment',
+    talkingPoints: [
+      'Propose specific next action',
+      'Offer multiple time options',
+      'Promise valuable follow-up materials'
+    ],
+    questionsToAsk: [
+      'Would you be open to learning more?',
+      'What day/time works best for you?'
+    ]
+  }
+]
+
+export function AIVoiceAgentAdvanced() {
+  const [isCallActive, setIsCallActive] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
+  const [isMuted, setIsMuted] = useState(false)
+  const [currentTurnIndex, setCurrentTurnIndex] = useState(0)
+  const [callDuration, setCallDuration] = useState(0)
+  const [currentStrategy, setCurrentStrategy] = useState(agentStrategies[0])
+  const [expandedSections, setExpandedSections] = useState({
+    conversation: true,
+    metrics: true,
+    strategy: false,
+    coaching: false
   })
   const intervalRef = useRef<NodeJS.Timeout>()
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const toggleSection = (section: keyof typeof expandedSections) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }))
+  }
 
   useEffect(() => {
-    if (callState === 'active' && isPlaying) {
-      intervalRef.current = setInterval(() => {
-        setCallDuration(prev => prev + 1)
+    if (isCallActive && !isPaused && currentTurnIndex < conversationScript.length) {
+      intervalRef.current = setTimeout(() => {
+        setCurrentTurnIndex(prev => prev + 1)
         
-        // Auto-advance conversation
-        if (currentTurnIndex < conversationScript.length - 1) {
-          if (callDuration % 3 === 0) {
-            setCurrentTurnIndex(prev => prev + 1)
-            updateStrategy(currentTurnIndex)
-          }
-        } else {
-          setIsPlaying(false)
-          setCallState('ended')
-        }
-      }, 1000)
-    } else {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-      }
+        // Update strategy based on conversation phase
+        if (currentTurnIndex === 2) setCurrentStrategy(agentStrategies[1])
+        if (currentTurnIndex === 4) setCurrentStrategy(agentStrategies[2])
+        if (currentTurnIndex === 7) setCurrentStrategy(agentStrategies[3])
+        if (currentTurnIndex === 9) setCurrentStrategy(agentStrategies[4])
+      }, 3000)
     }
-
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-      }
+      if (intervalRef.current) clearTimeout(intervalRef.current)
     }
-  }, [callState, isPlaying, callDuration, currentTurnIndex])
+  }, [isCallActive, isPaused, currentTurnIndex])
 
-  const updateStrategy = (turnIndex: number) => {
-    if (turnIndex < 3) {
-      setAgentStrategy({
-        phase: 'intro',
-        objective: 'Build rapport and identify pain points',
-        talkingPoints: ['Reference recent work', 'Work-life balance focus', 'Brief value prop'],
-        questionsToAsk: ['Current schedule?', 'Pain points?']
-      })
-    } else if (turnIndex < 6) {
-      setAgentStrategy({
-        phase: 'discovery',
-        objective: 'Understand needs and concerns',
-        talkingPoints: ['Specific metrics', 'Quality indicators', 'Staffing levels'],
-        questionsToAsk: ['Patient volume concerns?', 'Compensation expectations?']
-      })
-    } else if (turnIndex < 9) {
-      setAgentStrategy({
-        phase: 'presentation',
-        objective: 'Present compelling offer',
-        talkingPoints: ['Compensation package', 'Benefits', 'Relocation support'],
-        questionsToAsk: ['Other concerns?', 'Decision timeline?']
-      })
-    } else if (turnIndex < 12) {
-      setAgentStrategy({
-        phase: 'objection_handling',
-        objective: 'Address concerns and build confidence',
-        talkingPoints: ['Spousal assistance', 'Family considerations', 'Success stories'],
-        questionsToAsk: ['What would make this ideal?', 'Ready for next steps?']
-      })
-    } else {
-      setAgentStrategy({
-        phase: 'closing',
-        objective: 'Secure commitment and next steps',
-        talkingPoints: ['Schedule meeting', 'Send materials', 'Follow-up plan'],
-        questionsToAsk: ['Best time for call?', 'Preferred contact method?']
-      })
+  useEffect(() => {
+    if (isCallActive && !isPaused) {
+      const timer = setInterval(() => {
+        setCallDuration(prev => prev + 1)
+      }, 1000)
+      return () => clearInterval(timer)
     }
-  }
+  }, [isCallActive, isPaused])
 
-  const startCall = () => {
-    setCallState('connecting')
-    setTimeout(() => {
-      setCallState('active')
-      setIsPlaying(true)
-    }, 2000)
-  }
-
-  const endCall = () => {
-    setCallState('ended')
-    setIsPlaying(false)
-  }
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    }
+  }, [currentTurnIndex])
 
   const formatDuration = (seconds: number) => {
     const mins = Math.floor(seconds / 60)
@@ -310,547 +310,413 @@ export function AIVoiceAgentAdvanced() {
     return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
-  const getCurrentSentiment = () => {
-    const recent = conversationScript.slice(Math.max(0, currentTurnIndex - 2), currentTurnIndex + 1)
-    const sentiments = recent.map(turn => turn.sentiment)
-    const positive = sentiments.filter(s => s === 'positive').length
-    const negative = sentiments.filter(s => s === 'negative').length
+  const calculateMetrics = (): CallMetrics => {
+    const shown = conversationScript.slice(0, currentTurnIndex + 1)
+    const agentTurns = shown.filter(t => t.speaker === 'agent').length
+    const candidateTurns = shown.filter(t => t.speaker === 'candidate').length
     
-    if (positive > negative) return 'positive'
-    if (negative > positive) return 'negative'
-    return 'neutral'
+    return {
+      duration: formatDuration(callDuration),
+      talkTime: {
+        agent: agentTurns > 0 ? Math.round((agentTurns / (agentTurns + candidateTurns)) * 100) : 0,
+        candidate: candidateTurns > 0 ? Math.round((candidateTurns / (agentTurns + candidateTurns)) * 100) : 0
+      },
+      sentiment: {
+        positive: shown.filter(t => t.sentiment === 'positive').length,
+        neutral: shown.filter(t => t.sentiment === 'neutral').length,
+        negative: shown.filter(t => t.sentiment === 'negative').length
+      },
+      engagementScore: currentTurnIndex > 5 ? 85 : 65,
+      objections: ['Relocation concern', 'Current satisfaction', 'Timing flexibility'],
+      interests: ['Trauma center', 'Work-life balance', 'Higher compensation', 'Certification funding'],
+      nextSteps: ['Wednesday 3:30 PM video call', 'Send position overview', 'Share facility videos']
+    }
   }
 
-  const getEngagementLevel = () => {
-    const progress = (currentTurnIndex / conversationScript.length) * 100
-    if (progress < 30) return 'Warming Up'
-    if (progress < 60) return 'Engaged'
-    if (progress < 90) return 'Highly Engaged'
-    return 'Committed'
-  }
+  const metrics = calculateMetrics()
 
   return (
-    <div className="space-y-6">
-      {/* Call Controls */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2">
-              <Phone className="w-5 h-5" />
-              AI Voice Agent - Live Call Simulation
+    <div className="space-y-4">
+      {/* Control Panel - Mobile Optimized */}
+      <Card className="border-purple-200 dark:border-purple-800">
+        <CardHeader className="pb-3 md:pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
+              <Phone className="h-5 w-5 text-purple-600" />
+              AI Voice Agent Demo
             </CardTitle>
             <div className="flex items-center gap-2">
-              <Badge variant={callState === 'active' ? 'default' : 'secondary'}>
-                {callState === 'idle' && 'Ready'}
-                {callState === 'connecting' && 'Connecting...'}
-                {callState === 'active' && 'Live Call'}
-                {callState === 'ended' && 'Call Ended'}
+              <Badge variant="outline" className="text-xs md:text-sm">
+                <Activity className="h-3 w-3 mr-1" />
+                {isCallActive ? 'Call Active' : 'Ready'}
               </Badge>
-              {callState === 'active' && (
-                <Badge variant="outline" className="font-mono">
-                  {formatDuration(callDuration)}
-                </Badge>
-              )}
+              <Badge variant="outline" className="text-xs md:text-sm">
+                <Clock className="h-3 w-3 mr-1" />
+                {formatDuration(callDuration)}
+              </Badge>
             </div>
           </div>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <User className="w-4 h-4 text-muted-foreground" />
-                <span className="font-medium">Dr. Emily Rodriguez</span>
-                <Badge variant="outline" className="text-xs">Emergency Medicine</Badge>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">Los Angeles, CA</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Briefcase className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">8 years experience</span>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-2">
-              {callState === 'idle' && (
-                <Button onClick={startCall} size="lg">
-                  <Phone className="w-4 h-4 mr-2" />
-                  Start Call
-                </Button>
-              )}
-              {callState === 'active' && (
-                <>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setIsPlaying(!isPlaying)}
-                  >
-                    {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setIsMuted(!isMuted)}
-                  >
-                    {isMuted ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
-                  </Button>
-                  <Button
-                    variant="destructive"
-                    size="sm"
-                    onClick={endCall}
-                  >
-                    <PhoneOff className="w-4 h-4" />
-                  </Button>
-                </>
-              )}
-              {callState === 'ended' && (
-                <Button 
+          <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+            {!isCallActive ? (
+              <Button 
+                onClick={() => {
+                  setIsCallActive(true)
+                  setCurrentTurnIndex(0)
+                  setCallDuration(0)
+                }}
+                className="bg-green-600 hover:bg-green-700 text-sm md:text-base"
+              >
+                <Phone className="mr-2 h-4 w-4" />
+                Start Call
+              </Button>
+            ) : (
+              <>
+                <Button
+                  onClick={() => setIsPaused(!isPaused)}
                   variant="outline"
+                  size="sm"
+                  className="text-xs md:text-sm"
+                >
+                  {isPaused ? <Play className="mr-1 h-3 w-3 md:h-4 md:w-4" /> : <Pause className="mr-1 h-3 w-3 md:h-4 md:w-4" />}
+                  {isPaused ? 'Resume' : 'Pause'}
+                </Button>
+                <Button
+                  onClick={() => setIsMuted(!isMuted)}
+                  variant="outline"
+                  size="sm"
+                  className="text-xs md:text-sm"
+                >
+                  {isMuted ? <MicOff className="mr-1 h-3 w-3 md:h-4 md:w-4" /> : <Mic className="mr-1 h-3 w-3 md:h-4 md:w-4" />}
+                  {isMuted ? 'Unmute' : 'Mute'}
+                </Button>
+                <Button
                   onClick={() => {
-                    setCallState('idle')
+                    setIsCallActive(false)
+                    setIsPaused(false)
                     setCurrentTurnIndex(0)
                     setCallDuration(0)
                   }}
+                  variant="destructive"
+                  size="sm"
+                  className="text-xs md:text-sm"
                 >
-                  <RefreshCw className="w-4 h-4 mr-2" />
-                  Reset
+                  <PhoneOff className="mr-1 h-3 w-3 md:h-4 md:w-4" />
+                  End Call
                 </Button>
-              )}
-            </div>
+              </>
+            )}
           </div>
-
-          {/* Real-time Status Bar */}
-          {callState === 'active' && (
-            <div className="grid grid-cols-4 gap-4 p-4 bg-muted/50 rounded-lg mb-6">
-              <div className="text-center">
-                <p className="text-xs text-muted-foreground mb-1">Sentiment</p>
-                <Badge variant={getCurrentSentiment() === 'positive' ? 'default' : 'secondary'}>
-                  {getCurrentSentiment()}
-                </Badge>
-              </div>
-              <div className="text-center">
-                <p className="text-xs text-muted-foreground mb-1">Engagement</p>
-                <p className="font-medium text-sm">{getEngagementLevel()}</p>
-              </div>
-              <div className="text-center">
-                <p className="text-xs text-muted-foreground mb-1">Interest Level</p>
-                <p className="font-medium text-sm">{realTimeMetrics.intents.interest_level}%</p>
-              </div>
-              <div className="text-center">
-                <p className="text-xs text-muted-foreground mb-1">Next Step Probability</p>
-                <p className="font-medium text-sm">{realTimeMetrics.intents.commitment_probability}%</p>
-              </div>
-            </div>
-          )}
-
-          {/* Tabs */}
-          <div className="flex space-x-2 mb-6">
-            {['conversation', 'analytics', 'strategy', 'coaching'].map((tab) => (
-              <Button
-                key={tab}
-                variant={activeTab === tab ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setActiveTab(tab as any)}
-                className="capitalize"
-              >
-                {tab === 'conversation' && <MessageSquare className="w-4 h-4 mr-2" />}
-                {tab === 'analytics' && <BarChart3 className="w-4 h-4 mr-2" />}
-                {tab === 'strategy' && <Brain className="w-4 h-4 mr-2" />}
-                {tab === 'coaching' && <Sparkles className="w-4 h-4 mr-2" />}
-                {tab}
-              </Button>
-            ))}
-          </div>
-
-          {/* Conversation Tab */}
-          {activeTab === 'conversation' && (
-            <div className="space-y-4 max-h-[500px] overflow-y-auto">
-              <AnimatePresence>
-                {conversationScript.slice(0, currentTurnIndex + 1).map((turn, index) => (
-                  <motion.div
-                    key={turn.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className={`flex ${turn.speaker === 'agent' ? 'justify-start' : 'justify-end'}`}
-                  >
-                    <div className={`max-w-[70%] ${turn.speaker === 'agent' ? 'order-2' : 'order-1'}`}>
-                      <div className={`p-4 rounded-lg ${
-                        turn.speaker === 'agent' 
-                          ? 'bg-primary text-primary-foreground' 
-                          : 'bg-muted'
-                      }`}>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-medium">
-                            {turn.speaker === 'agent' ? 'Sarah (AI Agent)' : 'Dr. Rodriguez'}
-                          </span>
-                          <span className="text-xs opacity-70">{turn.timestamp}</span>
-                        </div>
-                        <p className="text-sm">{turn.text}</p>
-                        {turn.keyPoints && (
-                          <div className="mt-2 pt-2 border-t border-white/20">
-                            <div className="flex flex-wrap gap-1">
-                              {turn.keyPoints.map((point, i) => (
-                                <Badge key={i} variant="secondary" className="text-xs">
-                                  {point}
-                                </Badge>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                      {turn.intent && (
-                        <div className="mt-1 text-xs text-muted-foreground">
-                          Intent: {turn.intent.replace(/_/g, ' ')}
-                        </div>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-
-              {callState === 'active' && isPlaying && (
-                <div className="flex justify-start">
-                  <div className="bg-primary/10 rounded-lg p-4 max-w-[70%]">
-                    <div className="flex items-center gap-2">
-                      <div className="animate-pulse flex gap-1">
-                        <div className="w-2 h-2 bg-primary rounded-full"></div>
-                        <div className="w-2 h-2 bg-primary rounded-full"></div>
-                        <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      </div>
-                      <span className="text-xs text-muted-foreground">AI Agent is listening...</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Analytics Tab */}
-          {activeTab === 'analytics' && (
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <Card>
-                  <CardContent className="p-4">
-                    <h4 className="font-medium mb-3 flex items-center gap-2">
-                      <Activity className="w-4 h-4" />
-                      Live Metrics
-                    </h4>
-                    <div className="space-y-3">
-                      <div>
-                        <div className="flex justify-between mb-1">
-                          <span className="text-sm">Interest Level</span>
-                          <span className="text-sm font-medium">{realTimeMetrics.intents.interest_level}%</span>
-                        </div>
-                        <Progress value={realTimeMetrics.intents.interest_level} className="h-2" />
-                      </div>
-                      <div>
-                        <div className="flex justify-between mb-1">
-                          <span className="text-sm">Commitment Probability</span>
-                          <span className="text-sm font-medium">{realTimeMetrics.intents.commitment_probability}%</span>
-                        </div>
-                        <Progress value={realTimeMetrics.intents.commitment_probability} className="h-2" />
-                      </div>
-                      <div>
-                        <div className="flex justify-between mb-1">
-                          <span className="text-sm">Satisfaction Score</span>
-                          <span className="text-sm font-medium">{realTimeMetrics.intents.satisfaction_score}%</span>
-                        </div>
-                        <Progress value={realTimeMetrics.intents.satisfaction_score} className="h-2" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardContent className="p-4">
-                    <h4 className="font-medium mb-3 flex items-center gap-2">
-                      <TrendingUp className="w-4 h-4" />
-                      Key Topics
-                    </h4>
-                    <div className="space-y-2">
-                      {realTimeMetrics.topics.map((topic) => (
-                        <div key={topic.topic} className="flex items-center justify-between">
-                          <span className="text-sm">{topic.topic}</span>
-                          <div className="flex items-center gap-2">
-                            <Badge variant="outline" className="text-xs">
-                              {topic.mentions}x
-                            </Badge>
-                            <Badge 
-                              variant={
-                                topic.sentiment === 'positive' ? 'default' :
-                                topic.sentiment === 'negative' ? 'destructive' :
-                                'secondary'
-                              }
-                              className="text-xs"
-                            >
-                              {topic.sentiment}
-                            </Badge>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              <Card>
-                <CardContent className="p-4">
-                  <h4 className="font-medium mb-3 flex items-center gap-2">
-                    <Clock className="w-4 h-4" />
-                    Key Moments Timeline
-                  </h4>
-                  <div className="space-y-3">
-                    {realTimeMetrics.keyMoments.map((moment, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        <Badge variant="outline" className="font-mono text-xs">
-                          {moment.time}
-                        </Badge>
-                        <div className="flex-1">
-                          <p className="text-sm">{moment.event}</p>
-                        </div>
-                        <Badge 
-                          variant={
-                            moment.impact === 'critical' || moment.impact === 'success' ? 'default' :
-                            moment.impact === 'high' ? 'secondary' :
-                            'outline'
-                          }
-                        >
-                          {moment.impact}
-                        </Badge>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          )}
-
-          {/* Strategy Tab */}
-          {activeTab === 'strategy' && (
-            <div className="space-y-4">
-              <Card className="border-primary">
-                <CardContent className="p-4">
-                  <h4 className="font-medium mb-3 flex items-center gap-2">
-                    <Brain className="w-4 h-4" />
-                    Current Phase: {agentStrategy.phase.replace(/_/g, ' ').toUpperCase()}
-                  </h4>
-                  <div className="p-3 bg-primary/5 rounded-lg mb-3">
-                    <p className="text-sm font-medium mb-1">Objective</p>
-                    <p className="text-sm text-muted-foreground">{agentStrategy.objective}</p>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-sm font-medium mb-2">Key Talking Points</p>
-                      <div className="space-y-1">
-                        {agentStrategy.talkingPoints.map((point, i) => (
-                          <div key={i} className="flex items-center gap-2">
-                            <CheckCircle className="w-3 h-3 text-green-500" />
-                            <span className="text-sm">{point}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium mb-2">Questions to Ask</p>
-                      <div className="space-y-1">
-                        {agentStrategy.questionsToAsk.map((question, i) => (
-                          <div key={i} className="flex items-center gap-2">
-                            <MessageSquare className="w-3 h-3 text-blue-500" />
-                            <span className="text-sm">{question}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-4">
-                  <h4 className="font-medium mb-3">Recommended Responses</h4>
-                  <div className="space-y-2">
-                    <div className="p-3 bg-green-50 dark:bg-green-950/20 rounded-lg">
-                      <p className="text-sm font-medium text-green-700 dark:text-green-400 mb-1">
-                        If candidate shows high interest:
-                      </p>
-                      <p className="text-sm">
-                        "That's wonderful to hear! Let me schedule that video call with Dr. Mitchell right away. 
-                        He's excited to discuss how we can make this transition smooth for your entire family."
-                      </p>
-                    </div>
-                    <div className="p-3 bg-yellow-50 dark:bg-yellow-950/20 rounded-lg">
-                      <p className="text-sm font-medium text-yellow-700 dark:text-yellow-400 mb-1">
-                        If candidate has concerns:
-                      </p>
-                      <p className="text-sm">
-                        "I completely understand your concerns about [specific issue]. Many of our physicians had similar 
-                        questions. Would it help if I connected you with Dr. Sarah Chen who made a similar move last year?"
-                      </p>
-                    </div>
-                    <div className="p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
-                      <p className="text-sm font-medium text-blue-700 dark:text-blue-400 mb-1">
-                        If candidate needs time:
-                      </p>
-                      <p className="text-sm">
-                        "Of course, this is a big decision. I'll send you all the information we discussed. 
-                        Would it be alright if I followed up next Tuesday to see if you have any questions?"
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          )}
-
-          {/* Coaching Tab */}
-          {activeTab === 'coaching' && (
-            <div className="space-y-4">
-              <Card>
-                <CardContent className="p-4">
-                  <h4 className="font-medium mb-3 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4" />
-                    AI Performance Analysis
-                  </h4>
-                  <div className="space-y-3">
-                    <div className="p-3 bg-green-50 dark:bg-green-950/20 rounded-lg">
-                      <div className="flex items-center gap-2 mb-1">
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                        <span className="text-sm font-medium">Strengths</span>
-                      </div>
-                      <ul className="text-sm space-y-1 ml-6">
-                        <li>• Excellent personalization - referenced specific publication</li>
-                        <li>• Strong objection handling on spousal concerns</li>
-                        <li>• Clear next steps with specific scheduling options</li>
-                        <li>• Built rapport through shared parent experience</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="p-3 bg-yellow-50 dark:bg-yellow-950/20 rounded-lg">
-                      <div className="flex items-center gap-2 mb-1">
-                        <AlertCircle className="w-4 h-4 text-yellow-500" />
-                        <span className="text-sm font-medium">Areas for Improvement</span>
-                      </div>
-                      <ul className="text-sm space-y-1 ml-6">
-                        <li>• Could have asked more discovery questions early</li>
-                        <li>• Compensation discussion could be more consultative</li>
-                        <li>• Consider asking about decision timeline earlier</li>
-                      </ul>
-                    </div>
-
-                    <div className="p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Brain className="w-4 h-4 text-blue-500" />
-                        <span className="text-sm font-medium">Learning Insights</span>
-                      </div>
-                      <ul className="text-sm space-y-1 ml-6">
-                        <li>• Work-life balance resonates strongly with mid-career physicians</li>
-                        <li>• Spousal career support is critical for relocations</li>
-                        <li>• Evening scheduling shows respect for physician schedules</li>
-                        <li>• Specific metrics build credibility quickly</li>
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-4">
-                  <h4 className="font-medium mb-3">Conversation Score</h4>
-                  <div className="text-center py-4">
-                    <div className="text-4xl font-bold text-primary mb-2">92/100</div>
-                    <Badge variant="default" className="mb-3">Excellent Performance</Badge>
-                    <div className="grid grid-cols-3 gap-4 mt-4">
-                      <div>
-                        <p className="text-sm text-muted-foreground">Rapport</p>
-                        <p className="text-lg font-medium">95%</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">Discovery</p>
-                        <p className="text-lg font-medium">88%</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">Closing</p>
-                        <p className="text-lg font-medium">94%</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          )}
         </CardContent>
       </Card>
 
-      {/* Post-Call Summary */}
-      {callState === 'ended' && (
-        <Card className="border-green-500">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-green-500" />
-              Call Summary - Successful Outcome
-            </CardTitle>
+      <div className="grid lg:grid-cols-2 gap-4">
+        {/* Conversation Transcript - Mobile Optimized */}
+        <Card className="border-purple-200 dark:border-purple-800">
+          <CardHeader className="pb-3 md:pb-4">
+            <div className="flex items-center justify-between">
+              <CardTitle className="flex items-center gap-2 text-base md:text-lg">
+                <MessageSquare className="h-4 w-4 md:h-5 md:w-5 text-purple-600" />
+                Live Conversation
+              </CardTitle>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => toggleSection('conversation')}
+                className="md:hidden"
+              >
+                {expandedSections.conversation ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+              </Button>
+            </div>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-medium mb-3">Key Outcomes</h4>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    <span className="text-sm">Interview scheduled for Thursday 8 PM</span>
+          {(expandedSections.conversation || window.innerWidth >= 768) && (
+            <CardContent>
+              <div 
+                ref={scrollRef}
+                className="h-[300px] md:h-[400px] overflow-y-auto space-y-3 pr-2"
+              >
+                <AnimatePresence>
+                  {conversationScript.slice(0, currentTurnIndex + 1).map((turn) => (
+                    <motion.div
+                      key={turn.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`flex ${turn.speaker === 'agent' ? 'justify-start' : 'justify-end'}`}
+                    >
+                      <div className={`max-w-[85%] md:max-w-[80%] ${
+                        turn.speaker === 'agent' 
+                          ? 'bg-purple-100 dark:bg-purple-900/30' 
+                          : 'bg-blue-100 dark:bg-blue-900/30'
+                      } rounded-lg p-3`}>
+                        <div className="flex items-center gap-2 mb-1">
+                          <Badge variant="outline" className="text-xs">
+                            {turn.speaker === 'agent' ? '🤖 Agent' : '👨‍⚕️ Candidate'}
+                          </Badge>
+                          <span className="text-xs text-muted-foreground">{turn.timestamp}</span>
+                          <Badge 
+                            variant="outline" 
+                            className={`text-xs ${
+                              turn.sentiment === 'positive' ? 'text-green-600' :
+                              turn.sentiment === 'negative' ? 'text-red-600' :
+                              'text-yellow-600'
+                            }`}
+                          >
+                            {turn.sentiment === 'positive' ? '😊' :
+                             turn.sentiment === 'negative' ? '😟' : '😐'}
+                          </Badge>
+                        </div>
+                        <p className="text-xs md:text-sm mb-2">{turn.text}</p>
+                        {turn.intent && (
+                          <Badge variant="secondary" className="text-xs">
+                            Intent: {turn.intent}
+                          </Badge>
+                        )}
+                        {turn.keyPoints && turn.keyPoints.length > 0 && (
+                          <div className="flex flex-wrap gap-1 mt-2">
+                            {turn.keyPoints.map((point, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs">
+                                {point}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+                {isCallActive && currentTurnIndex < conversationScript.length - 1 && (
+                  <div className="flex justify-center">
+                    <Badge variant="outline" className="animate-pulse">
+                      <Activity className="h-3 w-3 mr-1" />
+                      AI Processing...
+                    </Badge>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    <span className="text-sm">High interest in position (85% score)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    <span className="text-sm">Spousal concerns addressed</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    <span className="text-sm">Information packet requested</span>
-                  </div>
-                </div>
+                )}
               </div>
-              
-              <div>
-                <h4 className="font-medium mb-3">Follow-up Actions</h4>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-blue-500" />
-                    <span className="text-sm">Send comprehensive packet within 1 hour</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-blue-500" />
-                    <span className="text-sm">Wednesday check-in scheduled</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MessageSquare className="w-4 h-4 text-blue-500" />
-                    <span className="text-sm">Text confirmation of Thursday meeting</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-blue-500" />
-                    <span className="text-sm">Add school/neighborhood info to packet</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-4 p-3 bg-green-50 dark:bg-green-950/20 rounded-lg">
-              <p className="text-sm font-medium mb-1">AI Recommendation</p>
-              <p className="text-sm text-muted-foreground">
-                High probability of successful placement (78%). Candidate showed strong interest in work-life balance 
-                and compensation package. Key to closing will be addressing family relocation comprehensively. 
-                Consider introducing to other relocated physicians with families.
-              </p>
-            </div>
-          </CardContent>
+            </CardContent>
+          )}
         </Card>
+
+        {/* Real-time Metrics - Mobile Optimized */}
+        <div className="space-y-4">
+          <Card className="border-purple-200 dark:border-purple-800">
+            <CardHeader className="pb-3 md:pb-4">
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2 text-base md:text-lg">
+                  <BarChart3 className="h-4 w-4 md:h-5 md:w-5 text-purple-600" />
+                  Call Analytics
+                </CardTitle>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => toggleSection('metrics')}
+                  className="md:hidden"
+                >
+                  {expandedSections.metrics ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                </Button>
+              </div>
+            </CardHeader>
+            {(expandedSections.metrics || window.innerWidth >= 768) && (
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <p className="text-xs text-muted-foreground mb-1">Talk Time Ratio</p>
+                    <div className="flex items-center gap-2">
+                      <Progress value={metrics.talkTime.agent} className="h-2" />
+                      <span className="text-xs font-medium">{metrics.talkTime.agent}%</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground mb-1">Engagement</p>
+                    <div className="flex items-center gap-2">
+                      <Progress value={metrics.engagementScore} className="h-2" />
+                      <span className="text-xs font-medium">{metrics.engagementScore}%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-xs text-muted-foreground mb-2">Sentiment Breakdown</p>
+                  <div className="flex gap-2">
+                    <Badge variant="outline" className="text-xs bg-green-50 dark:bg-green-950/20">
+                      😊 {metrics.sentiment.positive}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs bg-yellow-50 dark:bg-yellow-950/20">
+                      😐 {metrics.sentiment.neutral}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs bg-red-50 dark:bg-red-950/20">
+                      😟 {metrics.sentiment.negative}
+                    </Badge>
+                  </div>
+                </div>
+
+                {currentTurnIndex > 3 && (
+                  <>
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-2">Key Interests Detected</p>
+                      <div className="flex flex-wrap gap-1">
+                        {metrics.interests.slice(0, 3).map((interest, idx) => (
+                          <Badge key={idx} variant="secondary" className="text-xs">
+                            <Heart className="h-3 w-3 mr-1" />
+                            {interest}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-2">Objections Raised</p>
+                      <div className="flex flex-wrap gap-1">
+                        {metrics.objections.slice(0, 2).map((objection, idx) => (
+                          <Badge key={idx} variant="outline" className="text-xs">
+                            <AlertCircle className="h-3 w-3 mr-1" />
+                            {objection}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+              </CardContent>
+            )}
+          </Card>
+
+          {/* Agent Strategy - Mobile Optimized */}
+          <Card className="border-purple-200 dark:border-purple-800">
+            <CardHeader className="pb-3 md:pb-4">
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2 text-base md:text-lg">
+                  <Brain className="h-4 w-4 md:h-5 md:w-5 text-purple-600" />
+                  AI Strategy
+                </CardTitle>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => toggleSection('strategy')}
+                  className="md:hidden"
+                >
+                  {expandedSections.strategy ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                </Button>
+              </div>
+            </CardHeader>
+            {(expandedSections.strategy || window.innerWidth >= 768) && (
+              <CardContent className="space-y-3">
+                <div>
+                  <Badge className="mb-2 text-xs">{currentStrategy.phase.replace('_', ' ').toUpperCase()}</Badge>
+                  <p className="text-xs md:text-sm font-medium mb-1">Current Objective:</p>
+                  <p className="text-xs text-muted-foreground">{currentStrategy.objective}</p>
+                </div>
+                
+                <div>
+                  <p className="text-xs md:text-sm font-medium mb-2">Talking Points:</p>
+                  <ul className="space-y-1">
+                    {currentStrategy.talkingPoints.map((point, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <CheckCircle className="h-3 w-3 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-xs">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </CardContent>
+            )}
+          </Card>
+
+          {/* Conversation Coaching - Mobile Optimized */}
+          {currentTurnIndex > 5 && (
+            <Card className="border-purple-200 dark:border-purple-800">
+              <CardHeader className="pb-3 md:pb-4">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2 text-base md:text-lg">
+                    <Sparkles className="h-4 w-4 md:h-5 md:w-5 text-purple-600" />
+                    AI Coaching
+                  </CardTitle>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => toggleSection('coaching')}
+                    className="md:hidden"
+                  >
+                    {expandedSections.coaching ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                  </Button>
+                </div>
+              </CardHeader>
+              {(expandedSections.coaching || window.innerWidth >= 768) && (
+                <CardContent className="space-y-3">
+                  <div className="p-3 bg-green-50 dark:bg-green-950/20 rounded-lg">
+                    <p className="text-xs font-medium text-green-700 dark:text-green-300 mb-1">✅ What Worked Well</p>
+                    <ul className="text-xs space-y-1">
+                      <li>• Personalized opening with specific hospital name</li>
+                      <li>• Discovered family pain point effectively</li>
+                      <li>• Matched benefits to stated needs</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="p-3 bg-yellow-50 dark:bg-yellow-950/20 rounded-lg">
+                    <p className="text-xs font-medium text-yellow-700 dark:text-yellow-300 mb-1">💡 Suggestions</p>
+                    <ul className="text-xs space-y-1">
+                      <li>• Could probe deeper on research interests</li>
+                      <li>• Mention peer connections earlier</li>
+                      <li>• Prepare relocation testimonials</li>
+                    </ul>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-purple-50 dark:bg-purple-950/20 rounded-lg">
+                    <div>
+                      <p className="text-xs font-medium">Overall Performance</p>
+                      <p className="text-lg md:text-xl font-bold text-purple-600">A+</p>
+                    </div>
+                    <TrendingUp className="h-6 w-6 md:h-8 md:w-8 text-purple-600" />
+                  </div>
+                </CardContent>
+              )}
+            </Card>
+          )}
+        </div>
+      </div>
+
+      {/* Next Steps - Mobile Optimized */}
+      {currentTurnIndex === conversationScript.length - 1 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <Card className="border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/20">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="flex items-center gap-2 text-base md:text-lg">
+                <CheckCircle className="h-5 w-5 text-green-600" />
+                Call Successful - Next Actions
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {metrics.nextSteps.map((step, idx) => (
+                  <div key={idx} className="flex items-center gap-2 p-2 bg-white dark:bg-gray-800 rounded-lg">
+                    <div className="w-6 h-6 md:w-8 md:h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-xs md:text-sm font-bold text-green-600">{idx + 1}</span>
+                    </div>
+                    <span className="text-xs md:text-sm">{step}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                <Button className="bg-green-600 hover:bg-green-700 text-sm">
+                  <Send className="mr-2 h-4 w-4" />
+                  Send Follow-up Email
+                </Button>
+                <Button variant="outline" className="text-sm">
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Schedule Meeting
+                </Button>
+                <Button variant="outline" className="text-sm">
+                  <FileText className="mr-2 h-4 w-4" />
+                  Generate Report
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       )}
     </div>
   )
