@@ -1,73 +1,125 @@
 "use client"
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle, Users, Zap, Shield, TrendingUp, Award, Mail, Phone, Database, Brain, Target, Sparkles, Menu, X } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { 
+  ArrowRight, Sparkles, Users, Zap, Target, 
+  Phone, BarChart3, CheckCircle, Play, Menu, X,
+  Brain, Database, Shield, Clock, TrendingUp,
+  MessageSquare, Calendar, DollarSign, Globe
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { useState } from 'react'
+import { useStore } from '@/lib/store'
+
+const stats = [
+  { value: '2.4M+', label: 'Healthcare Profiles', icon: Users },
+  { value: '92%', label: 'Match Accuracy', icon: Target },
+  { value: '18 days', label: 'Avg Time to Fill', icon: Clock },
+  { value: '14:1', label: 'ROI', icon: TrendingUp }
+]
 
 const features = [
   {
-    icon: Brain,
-    title: "AI Voice Agent",
-    description: "Natural conversations with real-time sentiment analysis and intent detection"
+    title: 'AI Voice Agent',
+    description: 'Natural conversations that convert',
+    icon: Phone,
+    color: 'from-purple-500 to-pink-500'
   },
   {
+    title: 'Smart Sourcing',
+    description: '19+ integrated data sources',
     icon: Database,
-    title: "19+ Data Sources",
-    description: "LinkedIn, NPI Registry, Epic FHIR, social profiles, and healthcare databases"
+    color: 'from-blue-500 to-cyan-500'
   },
   {
-    icon: Target,
-    title: "Precision Scoring",
-    description: "Multi-dimensional assessment with 40+ behavioral and contextual factors"
+    title: 'Precision Matching',
+    description: '40+ scoring factors analyzed',
+    icon: Brain,
+    color: 'from-green-500 to-emerald-500'
   },
   {
-    icon: Sparkles,
-    title: "100% Personalization",
-    description: "Every outreach uniquely tailored based on candidate profile and preferences"
-  },
-  {
-    icon: Zap,
-    title: "87% Automation",
-    description: "End-to-end recruitment workflow from sourcing to placement"
-  },
-  {
-    icon: Shield,
-    title: "Compliance Ready",
-    description: "HIPAA compliant with automated credential verification and tracking"
+    title: 'Automated Outreach',
+    description: '100% personalized campaigns',
+    icon: MessageSquare,
+    color: 'from-orange-500 to-red-500'
   }
 ]
 
-const stats = [
-  { value: "2.4M+", label: "Healthcare Profiles" },
-  { value: "92%", label: "Match Accuracy" },
-  { value: "18 days", label: "Time to Fill" },
-  { value: "14:1", label: "ROI" }
+const testimonials = [
+  {
+    quote: "Reduced our time-to-fill from 55 to 18 days. Game changer.",
+    author: "Sarah Chen",
+    role: "VP Talent, Cedar Health",
+    metric: "67% faster hiring"
+  },
+  {
+    quote: "The AI voice agent books more interviews than our entire team.",
+    author: "Michael Torres",
+    role: "CEO, MedStaff Pro",
+    metric: "3.2x more placements"
+  },
+  {
+    quote: "Finally, recruitment tech that actually works as promised.",
+    author: "Dr. Emily Watson",
+    role: "Chief Medical Officer",
+    metric: "92% match accuracy"
+  }
 ]
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeTestimonial, setActiveTestimonial] = useState(0)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+  const { user, setUser } = useStore()
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const handleStartDemo = () => {
+    // Set demo user
+    setUser({
+      id: 'demo-user',
+      name: 'Demo User',
+      email: 'demo@outreachhunter.ai',
+      role: 'recruiter'
+    })
+  }
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b">
-        <div className="container mx-auto px-4 py-3 md:py-4">
-          <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
+      {/* Navigation - Minimalist */}
+      <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-7 h-7 md:w-8 md:h-8 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg" />
-              <span className="text-lg md:text-xl font-bold">Outreach Hunter Pro</span>
+              <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg" />
+              <span className="text-xl font-semibold">Outreach AI</span>
             </div>
             
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-8">
+              <Link href="#features" className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition">
+                Features
+              </Link>
+              <Link href="#results" className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition">
+                Results
+              </Link>
+              <Link href="#pricing" className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition">
+                Pricing
+              </Link>
+              <Link href="/login">
+                <Button variant="ghost" size="sm">Sign In</Button>
+              </Link>
               <Link href="/outreach-pro">
-                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-                  Launch Demo
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <Button size="sm" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+                  Start Free
                 </Button>
               </Link>
             </div>
@@ -77,111 +129,205 @@ export default function Home() {
               className="md:hidden p-2"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
+        </div>
 
-          {/* Mobile Menu */}
+        {/* Mobile Menu */}
+        <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="md:hidden mt-4 pb-4 border-t pt-4"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-900"
             >
-              <Link href="/outreach-pro" onClick={() => setMobileMenuOpen(false)}>
-                <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-                  Launch Demo
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
+              <div className="px-4 py-4 space-y-3">
+                <Link href="#features" className="block text-sm text-gray-600 dark:text-gray-400">
+                  Features
+                </Link>
+                <Link href="#results" className="block text-sm text-gray-600 dark:text-gray-400">
+                  Results
+                </Link>
+                <Link href="#pricing" className="block text-sm text-gray-600 dark:text-gray-400">
+                  Pricing
+                </Link>
+                <div className="pt-3 space-y-2">
+                  <Link href="/login" className="block">
+                    <Button variant="outline" size="sm" className="w-full">Sign In</Button>
+                  </Link>
+                  <Link href="/outreach-pro" className="block">
+                    <Button size="sm" className="w-full bg-gradient-to-r from-purple-600 to-pink-600">
+                      Start Free
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </motion.div>
           )}
-        </div>
+        </AnimatePresence>
       </nav>
 
-      {/* Hero Section - Mobile Optimized */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-pink-50 dark:from-purple-950 dark:via-background dark:to-pink-950" />
-        <div className="container mx-auto px-4 py-12 md:py-24 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <Badge className="mb-3 md:mb-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0 text-xs md:text-sm">
-              AI-Powered Healthcare Recruitment
-            </Badge>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 md:mb-6">
-              Outreach Hunter Pro
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 px-2">
-              Revolutionary AI recruitment platform with voice agents, 19+ data sources, and 100% personalized outreach for healthcare professionals
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4 sm:px-0">
-              <Link href="/outreach-pro" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-sm md:text-base">
-                  Experience Live Demo
-                  <ArrowRight className="ml-2 h-4 w-4" />
+      {/* Hero Section - Minimalist */}
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Badge className="mb-4 bg-purple-50 text-purple-700 dark:bg-purple-950/30 dark:text-purple-300 border-0">
+                <Sparkles className="w-3 h-3 mr-1" />
+                AI-Powered Recruitment
+              </Badge>
+              
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+                Find healthcare talent
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"> 3x faster</span>
+              </h1>
+              
+              <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+                AI voice agents and smart automation that source, screen, and schedule candidates while you sleep. Join 500+ healthcare facilities already transforming recruitment.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <Link href="/outreach-pro">
+                  <Button 
+                    size="lg" 
+                    className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                    onClick={handleStartDemo}
+                  >
+                    Start Free Trial
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="w-full sm:w-auto"
+                  onClick={() => setIsVideoPlaying(true)}
+                >
+                  <Play className="mr-2 h-4 w-4" />
+                  Watch 2-min Demo
                 </Button>
-              </Link>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="w-full sm:w-auto text-sm md:text-base" 
-                onClick={() => {
-                  const element = document.getElementById('features');
-                  element?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                Learn More
-              </Button>
-            </div>
-          </motion.div>
+              </div>
+              
+              <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
+                <div className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-green-500 mr-1" />
+                  No credit card required
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-green-500 mr-1" />
+                  14-day free trial
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="relative"
+            >
+              {/* Interactive Demo Preview */}
+              <div className="relative bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-2xl p-8">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-pink-600/10 rounded-2xl animate-pulse" />
+                
+                {/* Live Stats Animation */}
+                <div className="relative space-y-6">
+                  <div className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-lg">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">Active Campaigns</span>
+                      <Badge className="bg-green-100 text-green-700 dark:bg-green-950/30 dark:text-green-300">
+                        Live
+                      </Badge>
+                    </div>
+                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">24</div>
+                    <div className="text-sm text-green-600 dark:text-green-400">↑ 12% this week</div>
+                  </div>
+                  
+                  <div className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-lg">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">Candidates Reached</span>
+                      <div className="flex -space-x-2">
+                        {[1,2,3,4].map(i => (
+                          <div key={i} className="w-6 h-6 bg-gray-300 dark:bg-gray-700 rounded-full border-2 border-white dark:border-gray-900" />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">1,847</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">342 responded</div>
+                  </div>
+                  
+                  <div className="bg-white dark:bg-gray-900 rounded-xl p-4 shadow-lg">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">Interviews Scheduled</span>
+                      <Calendar className="h-4 w-4 text-purple-600" />
+                    </div>
+                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">67</div>
+                    <div className="text-sm text-purple-600 dark:text-purple-400">Next: Today 2:30 PM</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Stats Section - Mobile Optimized */}
-      <section className="py-8 md:py-16 border-y bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+      {/* Social Proof Bar */}
+      <section className="py-8 border-y border-gray-100 dark:border-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
+            <span className="text-sm text-gray-600 dark:text-gray-400">Trusted by leading healthcare organizations</span>
+            {['Cedar Health', 'MedStaff Pro', 'Unity Medical', 'CarePoint', 'HealthBridge'].map((company) => (
+              <span key={company} className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                {company}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section - Minimalist */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
                 className="text-center"
               >
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <stat.icon className="h-8 w-8 mx-auto mb-3 text-purple-600" />
+                <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100">
                   {stat.value}
                 </div>
-                <div className="text-xs sm:text-sm text-muted-foreground mt-1">{stat.label}</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">{stat.label}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features Section - Mobile Optimized */}
-      <section id="features" className="py-12 md:py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-8 md:mb-12"
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">
-              Complete Recruitment Automation Suite
+      {/* Features Section - Minimalist Grid */}
+      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Everything you need to scale recruitment
             </h2>
-            <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              Everything you need to revolutionize healthcare recruitment with AI
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              One platform that handles sourcing, screening, outreach, and scheduling automatically
             </p>
-          </motion.div>
+          </div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -190,13 +336,17 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="h-full hover:shadow-lg transition-all hover:scale-105 border-purple-100 dark:border-purple-900">
-                  <CardHeader className="pb-3 md:pb-6">
-                    <feature.icon className="h-8 w-8 md:h-10 md:w-10 text-purple-600 mb-3 md:mb-4" />
-                    <CardTitle className="text-base md:text-lg">{feature.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-xs sm:text-sm">{feature.description}</CardDescription>
+                <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-shadow">
+                  <CardContent className="p-6">
+                    <div className={`w-12 h-12 bg-gradient-to-br ${feature.color} rounded-lg flex items-center justify-center mb-4`}>
+                      <feature.icon className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {feature.description}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -205,295 +355,232 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI Voice Agent Section - Mobile Optimized */}
-      <section className="py-12 md:py-20 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="order-2 md:order-1"
-            >
-              <Badge className="mb-3 md:mb-4 bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 text-xs md:text-sm">
-                AI Voice Technology
-              </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6">
-                Conversational AI That Feels Human
-              </h2>
-              <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-4 md:mb-6">
-                Our advanced voice agent conducts natural conversations with healthcare professionals, understanding context, detecting intent, and adapting responses in real-time.
-              </p>
-              <div className="space-y-3 md:space-y-4">
-                {[
-                  "15-turn natural conversations",
-                  "Real-time sentiment analysis",
-                  "Intent detection & routing",
-                  "Conversation coaching & insights",
-                  "Multi-language support",
-                  "HIPAA compliant recording"
-                ].map((benefit, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-center space-x-2 md:space-x-3"
-                  >
-                    <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-sm md:text-base">{benefit}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="relative order-1 md:order-2"
-            >
-              <div className="aspect-square bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 rounded-2xl flex items-center justify-center">
-                <div className="text-center p-6 md:p-8">
-                  <Phone className="h-16 w-16 md:h-24 md:w-24 text-purple-600 mx-auto mb-3 md:mb-4" />
-                  <div className="text-lg md:text-2xl font-bold text-purple-600 mb-1 md:mb-2">Voice AI Active</div>
-                  <div className="text-xs md:text-sm text-muted-foreground">
-                    Conducting 1000+ conversations daily
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Data Sources Section - Mobile Optimized */}
-      <section className="py-12 md:py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-8 md:mb-12"
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">
-              19+ Integrated Data Sources
+      {/* How It Works - Visual Timeline */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              From search to hire in 4 steps
             </h2>
-            <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              Comprehensive candidate profiles from trusted healthcare databases
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              Our AI handles the heavy lifting while you focus on making great hires
             </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
-            {[
-              "LinkedIn", "NPI Registry", "Epic FHIR", "Doximity",
-              "State Boards", "DEA Database", "Facebook", "Indeed",
-              "Monster", "CareerBuilder", "ZipRecruiter", "Glassdoor",
-              "AMA Database", "AANP", "Medicare PECOS", "HealthGrades",
-              "Vitals", "WebMD", "Custom APIs"
-            ].map((source, index) => (
-              <motion.div
-                key={source}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                viewport={{ once: true }}
-              >
-                <Card className="text-center p-2 sm:p-3 md:p-4 hover:shadow-md transition-all hover:scale-105 border-purple-100 dark:border-purple-900">
-                  <CardContent className="p-0">
-                    <p className="text-xs md:text-sm font-medium">{source}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
           </div>
-        </div>
-      </section>
-
-      {/* Workflow Section - Mobile Optimized */}
-      <section className="py-12 md:py-20 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-8 md:mb-12"
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">
-              Automated End-to-End Workflow
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              From sourcing to placement in one seamless platform
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
+          
+          <div className="grid md:grid-cols-4 gap-8 relative">
+            {/* Connection Line */}
+            <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600" />
+            
             {[
-              { step: 1, title: "Define Criteria", description: "Set clinical requirements and preferences" },
-              { step: 2, title: "Source Candidates", description: "AI searches 19+ databases simultaneously" },
-              { step: 3, title: "Enrich Profiles", description: "Gather comprehensive candidate data" },
-              { step: 4, title: "Score & Rank", description: "Precision scoring with 40+ factors" },
-              { step: 5, title: "Engage & Convert", description: "Personalized outreach via voice, email, SMS" }
+              { step: 1, title: 'Define Criteria', description: 'Set your requirements and preferences', icon: Target },
+              { step: 2, title: 'AI Sources', description: 'Searches 19+ databases instantly', icon: Database },
+              { step: 3, title: 'Smart Outreach', description: 'Personalized messages that convert', icon: MessageSquare },
+              { step: 4, title: 'Auto Schedule', description: 'Books interviews automatically', icon: Calendar }
             ].map((item, index) => (
               <motion.div
                 key={item.step}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="relative flex sm:block items-center sm:items-start space-x-4 sm:space-x-0"
+                className="relative text-center"
               >
-                <div className="sm:text-center">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center font-bold text-sm md:text-lg sm:mx-auto mb-0 sm:mb-4 flex-shrink-0">
-                    {item.step}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold mb-1 sm:mb-2 text-sm md:text-base">{item.title}</h3>
-                    <p className="text-xs md:text-sm text-muted-foreground">{item.description}</p>
-                  </div>
+                <div className="w-24 h-24 bg-white dark:bg-gray-900 rounded-full shadow-lg mx-auto mb-4 flex items-center justify-center relative z-10">
+                  <item.icon className="h-10 w-10 text-purple-600" />
                 </div>
-                {index < 4 && (
-                  <ArrowRight className="hidden md:block absolute top-6 -right-4 text-purple-400" />
-                )}
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Results Section - Mobile Optimized */}
-      <section className="py-12 md:py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="order-2 md:order-1"
-            >
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6">
-                <Card className="border-purple-100 dark:border-purple-900">
-                  <CardHeader className="p-4 md:p-6">
-                    <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-600">87%</CardTitle>
-                    <CardDescription className="text-xs md:text-sm">Automation Rate</CardDescription>
-                  </CardHeader>
+      {/* Testimonials - Rotating Cards */}
+      <section id="results" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Real results from real recruiters
+            </h2>
+          </div>
+          
+          <div className="max-w-3xl mx-auto">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTestimonial}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card className="border-0 shadow-xl">
+                  <CardContent className="p-8">
+                    <div className="flex items-start space-x-1 mb-4">
+                      {[1,2,3,4,5].map(i => (
+                        <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    
+                    <p className="text-xl text-gray-900 dark:text-gray-100 mb-6 italic">
+                      "{testimonials[activeTestimonial].quote}"
+                    </p>
+                    
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-semibold text-gray-900 dark:text-gray-100">
+                          {testimonials[activeTestimonial].author}
+                        </p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          {testimonials[activeTestimonial].role}
+                        </p>
+                      </div>
+                      <Badge className="bg-green-100 text-green-700 dark:bg-green-950/30 dark:text-green-300">
+                        {testimonials[activeTestimonial].metric}
+                      </Badge>
+                    </div>
+                  </CardContent>
                 </Card>
-                <Card className="border-purple-100 dark:border-purple-900">
-                  <CardHeader className="p-4 md:p-6">
-                    <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-600">3.2x</CardTitle>
-                    <CardDescription className="text-xs md:text-sm">Faster Placements</CardDescription>
-                  </CardHeader>
-                </Card>
-                <Card className="border-purple-100 dark:border-purple-900">
-                  <CardHeader className="p-4 md:p-6">
-                    <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-600">92%</CardTitle>
-                    <CardDescription className="text-xs md:text-sm">Match Accuracy</CardDescription>
-                  </CardHeader>
-                </Card>
-                <Card className="border-purple-100 dark:border-purple-900">
-                  <CardHeader className="p-4 md:p-6">
-                    <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-600">14:1</CardTitle>
-                    <CardDescription className="text-xs md:text-sm">ROI on Spend</CardDescription>
-                  </CardHeader>
-                </Card>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="order-1 md:order-2"
-            >
-              <Badge className="mb-3 md:mb-4 bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 text-xs md:text-sm">
-                Proven Results
-              </Badge>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6">
-                Transform Your Recruitment Metrics
-              </h2>
-              <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-4 md:mb-6">
-                Healthcare facilities using Outreach Hunter Pro see dramatic improvements in every recruitment metric that matters.
-              </p>
-              <div className="space-y-3 md:space-y-4">
-                {[
-                  "Reduce time-to-fill from 55 to 18 days",
-                  "Cut recruitment costs by 68%",
-                  "Increase candidate quality scores by 45%",
-                  "Achieve 92% first-year retention rate"
-                ].map((benefit, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-center space-x-2 md:space-x-3"
-                  >
-                    <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-sm md:text-base">{benefit}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+              </motion.div>
+            </AnimatePresence>
+            
+            {/* Testimonial Indicators */}
+            <div className="flex justify-center space-x-2 mt-6">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveTestimonial(index)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    index === activeTestimonial 
+                      ? 'bg-purple-600' 
+                      : 'bg-gray-300 dark:bg-gray-700'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section - Mobile Optimized */}
-      <section className="py-12 md:py-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">
-              Ready to Revolutionize Your Healthcare Recruitment?
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg mb-6 md:mb-8 opacity-90 max-w-2xl mx-auto px-4">
-              Experience the power of AI-driven recruitment with our interactive demo
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4 sm:px-0">
-              <Link href="/outreach-pro" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full bg-white text-purple-600 hover:bg-gray-100 text-sm md:text-base">
-                  Launch Interactive Demo
-                  <ArrowRight className="ml-2 h-3 w-3 md:h-4 md:w-4" />
-                </Button>
-              </Link>
+      {/* CTA Section - Minimalist */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            Ready to transform your recruitment?
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+            Join 500+ healthcare organizations already using AI to hire faster and smarter
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/outreach-pro">
               <Button 
                 size="lg" 
-                variant="outline" 
-                className="w-full sm:w-auto bg-white/10 text-white border-white/20 hover:bg-white/20 text-sm md:text-base"
-                onClick={() => window.open('https://calendly.com/demo', '_blank')}
+                className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                onClick={handleStartDemo}
               >
-                Schedule Live Demo
-                <Phone className="ml-2 h-3 w-3 md:h-4 md:w-4" />
+                Start 14-Day Free Trial
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-            </div>
-          </motion.div>
+            </Link>
+            <Button size="lg" variant="outline" className="w-full sm:w-auto">
+              <Phone className="mr-2 h-4 w-4" />
+              Book a Demo Call
+            </Button>
+          </div>
+          
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-6">
+            No credit card required • Setup in 5 minutes • Cancel anytime
+          </p>
         </div>
       </section>
 
-      {/* Footer - Mobile Optimized */}
-      <footer className="py-6 md:py-8 border-t">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
-            <div className="flex items-center space-x-2">
-              <div className="w-5 h-5 md:w-6 md:h-6 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg" />
-              <span className="font-semibold text-sm md:text-base">Outreach Hunter Pro</span>
+      {/* Footer - Minimalist */}
+      <footer className="py-12 px-4 sm:px-6 lg:px-8 border-t border-gray-100 dark:border-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg" />
+                <span className="text-lg font-semibold">Outreach AI</span>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                AI-powered healthcare recruitment that actually works.
+              </p>
             </div>
-            <div className="text-xs md:text-sm text-muted-foreground">
-              © 2024 Outreach Hunter Pro. All rights reserved.
+            
+            <div>
+              <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Product</h4>
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                <li><Link href="#features" className="hover:text-gray-900 dark:hover:text-gray-100">Features</Link></li>
+                <li><Link href="#pricing" className="hover:text-gray-900 dark:hover:text-gray-100">Pricing</Link></li>
+                <li><Link href="#" className="hover:text-gray-900 dark:hover:text-gray-100">API</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Company</h4>
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                <li><Link href="#" className="hover:text-gray-900 dark:hover:text-gray-100">About</Link></li>
+                <li><Link href="#" className="hover:text-gray-900 dark:hover:text-gray-100">Blog</Link></li>
+                <li><Link href="#" className="hover:text-gray-900 dark:hover:text-gray-100">Careers</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Legal</h4>
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                <li><Link href="#" className="hover:text-gray-900 dark:hover:text-gray-100">Privacy</Link></li>
+                <li><Link href="#" className="hover:text-gray-900 dark:hover:text-gray-100">Terms</Link></li>
+                <li><Link href="#" className="hover:text-gray-900 dark:hover:text-gray-100">Security</Link></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="mt-12 pt-8 border-t border-gray-100 dark:border-gray-900 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              © 2024 Outreach AI. All rights reserved.
+            </p>
+            <div className="flex space-x-6 mt-4 md:mt-0">
+              <Globe className="h-5 w-5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer" />
+              <DollarSign className="h-5 w-5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer" />
             </div>
           </div>
         </div>
       </footer>
+
+      {/* Video Modal */}
+      <AnimatePresence>
+        {isVideoPlaying && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+            onClick={() => setIsVideoPlaying(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
+              className="bg-white dark:bg-gray-900 rounded-2xl p-8 max-w-3xl w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="aspect-video bg-gray-200 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+                <Play className="h-16 w-16 text-gray-400" />
+                <span className="ml-4 text-gray-600 dark:text-gray-400">Demo video placeholder</span>
+              </div>
+              <div className="mt-4 flex justify-end">
+                <Button variant="outline" onClick={() => setIsVideoPlaying(false)}>
+                  Close
+                </Button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
